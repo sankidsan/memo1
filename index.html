@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>make my note</title>
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins
+:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;
+1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <div class="navbar">
+        <h1>Make Your Own Notes</h1>
+    </div>
+    <div class="container">
+        <div class="book-container">
+            <h2>you win the race</h2>
+            <h5>franklin</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nisi odit quam. 
+                Rerum corporis hic voluptatem enim repellat accusantium minus aliquid natus. Odit 
+                eos obcaecati accusantium nostrum cum magni similique?</p>
+                <button  onClick="deletenote(event)">delete</button>
+        </div>
+        
+    </div>
+    <div class="pop-up-overlay">
+        <div class="pop-up-box">
+            <h2>Add Notes</h2>
+            <form>
+                <input type="text" placeholder="Note-title" id="Note-title-input">
+                <input type="text" placeholder="Note-author" id="Note-author-input">
+                <textarea placeholder="Short description" id="note-des-input" ></textarea>
+                <button id="add-note">Add</button>
+                <button id="cancel-note">Cancel</button>
+
+
+
+            </form>
+        </div>
+    </div>
+
+    <button class="add-button" id="pop-up-button">+</button>
+    <!----------style-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        *{
+            margin: 0%;
+            padding: 0%;
+        }
+        .navbar{
+            background-color: #fd6569;
+            padding: 10px;
+        }
+        .container{
+            padding: 10px;
+        }
+        .book-container{
+            padding: 15px;
+            width: 25%;
+            color: white;
+            background-color: black;
+            border-radius: 10px;
+            margin: 30px;
+            display:inline-block;
+        vertical-align: top;    
+        }
+        .book-container h2{
+            color: #fd6569;
+        }
+        .book-container button{
+            background-color: #fd6569;
+            color: black;
+            border-radius: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border:none;
+            margin-top: 10px;
+        }
+        .add-button{
+            background-color: #fd6569;
+            color: black;
+            border-radius: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            border: none;
+            font-size: 40px;
+        }
+        .pop-up-overlay{
+            background-color: black;
+            opacity:0.8;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left:0;
+            z-index: 1;
+            display:none;
+        }
+        .pop-up-box{
+            background-color: #fd6569;
+            width:40%;
+            padding: 40px;
+            border-radius: 10px;
+            position: absolute;
+            top:20%;
+            left: 30%;
+            bottom: 20%;
+            z-index: 2;
+            display:none;
+        }
+        .pop-up-box input{
+            background-color: transparent;
+            border:none;
+           width:100%;
+           margin: 5px;
+           padding: 5px;
+           font-size: 20px;
+           border-bottom: solid black 2px;
+        }
+        .pop-up-box textarea{
+            background-color: transparent;
+           width:100%;
+           margin: 5px;
+           padding: 5px;
+           font-size: 20px;
+           border: solid black 2px;
+        }
+        .pop-up-box input::placeholder{
+            color:black;
+        }
+        .pop-up-box textarea::placeholder{
+            color:black;
+        }
+        .pop-up-box button{
+            background-color: black;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top:10px;
+            padding-bottom: 10px;
+            margin: 5px;
+            border: none;
+
+        }
+        .pop-up-box input:focus{
+            outline: none;
+        }
+        .pop-up-box textarea:focus{
+            outline: none;
+        }
+
+    </style>
+    <!-------------script-->
+    <script>
+ var popupoverlay= document.querySelector(".pop-up-overlay")
+ var popupbox=document.querySelector(".pop-up-box")
+ var addpopupbutton=document.getElementById("pop-up-button")
+ addpopupbutton.addEventListener("click",function(){
+    popupoverlay.style.display="block"
+    popupbox.style.display="block"
+ })
+
+
+ //select cancel
+ var cancelnote=document.getElementById("cancel-note")
+ cancelnote.addEventListener("click",function(event){
+    event.preventDefault()
+    popupoverlay.style.display="none"
+    popupbox.style.display="none"
+
+ })
+ //select container,add-note,Note-title-input,Note-author-input,note-des-input
+
+ var container=document.querySelector(".container")
+  var addnote=document.getElementById("add-note")
+  var Notetitleinput=document.getElementById("Note-title-input")
+  var Noteauthorinput=document.getElementById("Note-author-input")
+  var notedesinput=document.getElementById("note-des-input")
+
+
+  addnote.addEventListener("click",function(event){
+    event.preventDefault()
+    var div=document.createElement("div")
+    div.setAttribute("class","book-container")
+    div.innerHTML=`<h2>${Notetitleinput.value}</h2>
+    <h5>${Noteauthorinput.value}</h5>
+    <p>${notedesinput.value}
+    </p>
+        <button  onClick="deletenote(event)">delete</button>`
+    
+    container.append(div)
+    popupoverlay.style.display="none"
+    popupbox.style.display="none"
+
+  })
+  function deletenote(event){
+    event.target.parentElement.remove()
+  }
+
+    </script>
+</body>
+</html>
